@@ -6,11 +6,7 @@ import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
 import MenuContainer from "./MenuContainer";
 import CartContainer from "./CartContainer";
-<<<<<<< HEAD
-import Carrot from "../img/c2.png";
-=======
 import Carrot from '../img/carrot.png'
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
 
 const MainContainer = () => {
   const [{ foodItems, cartShow }, dispatch] = useStateValue();
@@ -20,93 +16,65 @@ const MainContainer = () => {
       imageURL: Carrot,
       title: 'Carrot',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '100',
       qty: 1
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     },
     {
       imageURL: Carrot,
       title: 'Tomato',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '200',
       qty: 1
 
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     },
     {
       imageURL: Carrot,
       title: 'Potato',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '300',
       qty: 1
 
 
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     },
     {
       imageURL: Carrot,
       title: 'Onion',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '400',
       qty: 1
 
 
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     },
     {
       imageURL: Carrot,
       title: 'Cauliflower',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '500'
 
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     },
     {
       imageURL: Carrot,
       title: 'Beetroot',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '600',
       qty: 1
 
 
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     },
     {
       imageURL: Carrot,
       title: 'Cucumber',
       calories: '20 callories',
-<<<<<<< HEAD
-      category: 'fruits'
-=======
       category: 'fruits',
       price: '700',
       qty: 1
 
->>>>>>> 87a6ac9866ca526a837634312485ba4f4c0bad20
     }
   ]
 
