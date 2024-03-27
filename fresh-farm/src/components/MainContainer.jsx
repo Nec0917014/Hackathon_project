@@ -6,10 +6,55 @@ import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
 import MenuContainer from "./MenuContainer";
 import CartContainer from "./CartContainer";
+import Carrot from "../img/c2.png";
 
 const MainContainer = () => {
   const [{ foodItems, cartShow }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
+  const data= [
+    {
+      imageURL: Carrot,
+      title: 'Carrot',
+      calories: '20 callories',
+      category: 'fruits'
+    },
+    {
+      imageURL: Carrot,
+      title: 'Tomato',
+      calories: '20 callories',
+      category: 'fruits'
+    },
+    {
+      imageURL: Carrot,
+      title: 'Potato',
+      calories: '20 callories',
+      category: 'fruits'
+    },
+    {
+      imageURL: Carrot,
+      title: 'Onion',
+      calories: '20 callories',
+      category: 'fruits'
+    },
+    {
+      imageURL: Carrot,
+      title: 'Cauliflower',
+      calories: '20 callories',
+      category: 'fruits'
+    },
+    {
+      imageURL: Carrot,
+      title: 'Beetroot',
+      calories: '20 callories',
+      category: 'fruits'
+    },
+    {
+      imageURL: Carrot,
+      title: 'Cucumber',
+      calories: '20 callories',
+      category: 'fruits'
+    }
+  ]
 
   useEffect(() => {}, [scrollValue, cartShow]);
 
@@ -43,7 +88,7 @@ const MainContainer = () => {
         <RowContainer
           scrollValue={scrollValue}
           flag={true}
-          data={foodItems?.filter((n) => n.category === "fruits")}
+          data={data?.filter((n) => n.category === "fruits")}
         />
       </section>
 
