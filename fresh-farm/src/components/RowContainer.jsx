@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import NotFound from "../img/NotFound.svg";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
+import { BsCart3 } from "react-icons/bs";
+import { FaRupeeSign } from "react-icons/fa6";
 
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
@@ -41,40 +43,40 @@ const RowContainer = ({ flag, data, scrollValue }) => {
         data.map((item) => (
           <div
             key={item?.id}
-            className="w-275 h-[175px] min-w-[275px] md:w-300 md:min-w-[300px]  bg-cardOverlay rounded-lg py-2 px-4  my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative"
+            className="w-275 h-[275px] min-w-[275px] md:w-300 md:min-w-[300px] bg-cardOverlay rounded-lg py-2 px-4 my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-between relative"
           >
-            <div className="w-full flex items-center justify-between">
+            <div className="w-full flex items-center justify-center mb-4">
               <motion.div
-                className="w-40 h-40 -mt-8 drop-shadow-2xl"
+                className="w-40 h-40 -mt-8 drop-shadow-2xl overflow-hidden rounded-full bg-white flex items-center justify-center"
                 whileHover={{ scale: 1.2 }}
               >
                 <img
                   src={item?.imageURL}
                   alt=""
-                  className="w-full h-full object-contain"
+                  className="max-w-full max-h-full rounded-full object-contain"
                 />
-              </motion.div>
-              <motion.div
-                whileTap={{ scale: 0.75 }}
-                className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8"
-                onClick={() => setItems([...cartItems, item])}
-              >
-                <MdShoppingBasket className="text-white" />
               </motion.div>
             </div>
 
-            <div className="w-full flex flex-col items-end justify-end -mt-8">
-              <p className="text-textColor font-semibold text-base md:text-lg">
+            <div className="w-full flex flex-col items-center justify-between">
+              <p className="text-textColor font-semibold text-base md:text-lg text-center mb-1">
                 {item?.title}
               </p>
-              <p className="mt-1 text-sm text-gray-500">
-                {item?.calories} Calories
-              </p>
-              <div className="flex items-center gap-8">
-                <p className="text-lg text-headingColor font-semibold">
-                  <span className="text-sm text-red-500">$</span> {item?.price}
+              <div className="flex items-center justify-center mb-2">
+                <p className="text-lg flex text-headingColor font-semibold">
+                  <span className="text-sm text-green-500 mx-3">
+                    <FaRupeeSign />
+                  </span>{" "}
+                  {item?.price}
                 </p>
               </div>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 ease-in-out"
+                onClick={() => setItems([...cartItems, item])}
+              >
+                Add to Cart
+              </motion.button>
             </div>
           </div>
         ))

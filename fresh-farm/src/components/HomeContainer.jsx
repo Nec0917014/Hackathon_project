@@ -24,6 +24,9 @@ const HomeContainer = () => {
         </div>  */}
 
         <p className="text-[2.5rem] lg:text-[4.5rem] font-bold tracking-wide text-headingColor">
+          The Fastest Delivery in
+          <span className="text-green-500 text-[3rem] lg:text-[5rem]">
+            Your City
           The Organic Food
           <span className="text-green-600 text-[3rem] lg:text-[5rem]">
             From Farmers

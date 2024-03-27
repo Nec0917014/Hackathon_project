@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { fetchCart } from "../utils/fetchLocalStorageData";
+import { FaRupeeSign } from "react-icons/fa6";
+
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {
@@ -63,7 +65,10 @@ const CartItem = ({ item, setFlag, flag }) => {
       <div className="flex flex-col gap-2">
         <p className="text-base text-gray-50">{item?.title}</p>
         <p className="text-sm block text-gray-300 font-semibold">
-          $ {parseFloat(item?.price) * qty}
+          {
+            console.log("item?.price", item?.price , qty)
+          }
+          <FaRupeeSign /> {item?.price * qty}
         </p>
       </div>
 
