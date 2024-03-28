@@ -10,10 +10,15 @@ import Carrot from "../img/carrot.png";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { apiUrl } from "../utils/constants";
+import Header from "./Header";
+import { useLocation } from "react-router-dom"
+
 const MainContainer = () => {
   const [{ foodItems, cartShow }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
   const [data, setData] = useState([]);
+ const location = useLocation();
+  const userType = location.state && location.state.userType;
 
   const getItems = async () => {
     const response = await axios.get(`${apiUrl}product/get`);
@@ -35,7 +40,7 @@ const MainContainer = () => {
 
   return (
     <>
-     <Header />
+     <Header userType={userType} />
       <div className="w-full h-auto flex flex-col items-center justify-center ">
      
         <HomeContainer />

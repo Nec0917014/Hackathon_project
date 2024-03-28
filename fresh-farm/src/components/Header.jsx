@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 
-const Header = () => {
+const Header = (userType) => {
   // const firebaseAuth = getAuth(app);
   // const provider = new GoogleAuthProvider();
 
@@ -22,7 +22,7 @@ const Header = () => {
   const login = async () => {
     if (!user) {
       const {
-        user: { refreshToken, providerData },
+        user: {  providerData },
       } = "";
       dispatch({
         type: actionType.SET_USER,
@@ -59,6 +59,8 @@ const Header = () => {
     window.location.assign("/");
   };
 
+  console.log("userType", userType);
+
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary" style={{position: 'fixed', top: '0', left: '0', width: '100%', padding: '0px'}}>
       {/* desktop & tablet */}
@@ -82,12 +84,16 @@ const Header = () => {
             >
               Home
             </li>
-            <li
+            {
+              userType.userType !== 'user' &&
+                 <li
               className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
               onClick={redirectToFarmersPage}
             >
               Farmers Page
             </li>
+            }
+         
             {/* <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               About Us
             </li>
