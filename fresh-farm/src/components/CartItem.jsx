@@ -5,12 +5,13 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { fetchCart } from "../utils/fetchLocalStorageData";
 import { FaRupeeSign } from "react-icons/fa6";
+import { api } from "../utils/constants";
 
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {
   const [{ cartItems }, dispatch] = useStateValue();
-  const [qty, setQty] = useState(item.qty);
+  const [qty, setQty] = useState(parseInt(item.qty));
 
   const cartDispatch = () => {
     localStorage.setItem("cartItems", JSON.stringify(items));
@@ -22,10 +23,12 @@ const CartItem = ({ item, setFlag, flag }) => {
 
   const updateQty = (action, id) => {
     if (action == "add") {
-      setQty(qty + 1);
+          console.log("item.qty", qty, typeof qty);
+      setQty(parseInt(qty + 1));
       cartItems.map((item) => {
         if (item.id === id) {
-          item.qty += 1;
+          console.log("item.qtysssssssssss", typeof item.qty);
+        item.qty = parseInt(item.qty) + 1
           setFlag(flag + 1);
         }
       });
@@ -56,7 +59,7 @@ const CartItem = ({ item, setFlag, flag }) => {
   return (
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
       <img
-        src={item?.imageURL}
+        src={`${api}/api/assets/products/${item.imageUrl}`}
         className="w-20 h-20 max-w-[60px] rounded-full object-contain"
         alt=""
       />

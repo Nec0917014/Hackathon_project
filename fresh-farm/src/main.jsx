@@ -7,12 +7,15 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { StateProvider } from "./context/StateProvider";
 import { initialState } from "./context/initalState";
 import reducer from "./context/reducer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
   <Router>
     <StateProvider initialState={initialState} reducer={reducer}>
     <App />
+     <ToastContainer />
     </StateProvider>
     </Router>
   </React.StrictMode>,

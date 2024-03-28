@@ -10,6 +10,8 @@ import {
 } from "react-icons/md";
 import { categories } from "../utils/data";
 import Loader from "./Loader";
+import { FaRupeeSign } from "react-icons/fa6";
+
 // import {
 //   deleteObject,
 //   getDownloadURL,
@@ -20,10 +22,13 @@ import Loader from "./Loader";
 // import { getAllFoodItems, saveItem } from "../utils/firebaseFunctions";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
+import axios from "axios";
+import { apiUrl } from "../utils/constants";
+import { toast } from "react-toastify";
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
-  const [calories, setCalories] = useState("");
+  const [qty, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
@@ -36,38 +41,40 @@ const CreateContainer = () => {
   const uploadImage = (e) => {
     setIsLoading(true);
     const imageFile = e.target.files[0];
-    const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+    setIsLoading(false);
+    setImageAsset(imageFile);
+    // const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
+    // const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const uploadProgress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
-      (error) => {
-        console.log(error);
-        setFields(true);
-        setMsg("Error while uploading : Try AGain 🙇");
-        setAlertStatus("danger");
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageAsset(downloadURL);
-          setIsLoading(false);
-          setFields(true);
-          setMsg("Image uploaded successfully 😊");
-          setAlertStatus("success");
-          setTimeout(() => {
-            setFields(false);
-          }, 4000);
-        });
-      }
-    );
+    // uploadTask.on(
+    //   "state_changed",
+    //   (snapshot) => {
+    //     const uploadProgress =
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //     setFields(true);
+    //     setMsg("Error while uploading : Try AGain 🙇");
+    //     setAlertStatus("danger");
+    //     setTimeout(() => {
+    //       setFields(false);
+    //       setIsLoading(false);
+    //     }, 4000);
+    //   },
+    //   () => {
+    //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+    //       setImageAsset(downloadURL);
+    //       setIsLoading(false);
+    //       setFields(true);
+    //       setMsg("Image uploaded successfully 😊");
+    //       setAlertStatus("success");
+    //       setTimeout(() => {
+    //         setFields(false);
+    //       }, 4000);
+    //     });
+    //   }
+    // );
   };
 
   const deleteImage = () => {
@@ -85,10 +92,11 @@ const CreateContainer = () => {
     });
   };
 
-  const saveDetails = () => {
+  const saveDetails = async (e) => {
     setIsLoading(true);
     try {
-      if (!title || !calories || !imageAsset || !price || !category) {
+      console.log(title,qty,  imageAsset,price, category );
+      if (!title || !qty || !imageAsset || !price || !category) {
         setFields(true);
         setMsg("Required fields can't be empty");
         setAlertStatus("danger");
@@ -97,43 +105,74 @@ const CreateContainer = () => {
           setIsLoading(false);
         }, 4000);
       } else {
-        const data = {
-          id: `${Date.now()}`,
-          title: title,
-          imageURL: imageAsset,
-          category: category,
-          calories: calories,
-          qty: 1,
-          price: price,
-        };
-        saveItem(data);
-        setIsLoading(false);
-        setFields(true);
-        setMsg("Data Uploaded successfully 😊");
-        setAlertStatus("success");
-        setTimeout(() => {
-          setFields(false);
-        }, 4000);
-        clearData();
+        // const data = {
+        //   id: `${Date.now()}`,
+        //   title: title,
+        //   imageURL: imageAsset,
+        //   category: category,
+        //   qty: qty,
+        //   qty: 1,
+        //   price: price,
+        // };
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("imageUrl", imageAsset);
+        formData.append("qty", qty);
+        formData.append("category", category);
+        formData.append("price", price);
+
+        const response = await axios.post(`${apiUrl}product/add`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        if (response.status === 200) {
+e.preventDefault()
+          toast.success("Product added successfully!", {
+            position: 'top-right',
+          });
+          setIsLoading(false)
+          setImageAsset(null);
+          setTitle(null);
+          setPrice(null);
+          setCategory(null);
+          setQuantity('')
+        } else {
+          toast.success("Something went wrong please try again later!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+
+        // saveItem(data);
+        // setIsLoading(false);
+        // setFields(true);
+        // setMsg("Data Uploaded successfully 😊");
+        // setAlertStatus("success");
+        // setTimeout(() => {
+        //   setFields(false);
+        // }, 4000);
+        // clearData();
       }
     } catch (error) {
       console.log(error);
-      setFields(true);
-      setMsg("Error while uploading : Try AGain 🙇");
-      setAlertStatus("danger");
-      setTimeout(() => {
-        setFields(false);
-        setIsLoading(false);
-      }, 4000);
+      // setFields(true);
+      // setMsg("Error while uploading : Try AGain 🙇");
+      // setAlertStatus("danger");
+      // setTimeout(() => {
+      //   setFields(false);
+      //   setIsLoading(false);
+      // }, 4000);
     }
 
-    fetchData();
+    // fetchData();
   };
 
   const clearData = () => {
     setTitle("");
     setImageAsset(null);
-    setCalories("");
+    setQuantity("");
     setPrice("");
     setCategory("Select Category");
   };
@@ -177,12 +216,12 @@ const CreateContainer = () => {
           />
         </div>
 
-        {/* <div className="w-full">
+        <div className="w-full">
           <select
             onChange={(e) => setCategory(e.target.value)}
-            className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
+            className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer bg-transparent"
           >
-            <option value="other" className="bg-white">
+            <option value="other" className="bg-transparent">
               Select Category
             </option>
             {categories &&
@@ -191,14 +230,15 @@ const CreateContainer = () => {
                   key={item.id}
                   className="text-base border-0 outline-none capitalize bg-white text-headingColor"
                   value={item.urlParamName}
+                  onChange={(e) => setCategory(e.target.value)}
                 >
                   {item.name}
                 </option>
               ))}
           </select>
-        </div> */}
+        </div>
 
-        {/* <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-340 cursor-pointer rounded-lg">
+        <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-340 cursor-pointer rounded-lg">
           {isLoading ? (
             <Loader />
           ) : (
@@ -223,9 +263,10 @@ const CreateContainer = () => {
                 </>
               ) : (
                 <>
+                 
                   <div className="relative h-full">
                     <img
-                      src={imageAsset}
+                      src={URL.createObjectURL(imageAsset)}
                       alt="uploaded image"
                       className="w-full h-full object-cover"
                     />
@@ -241,7 +282,7 @@ const CreateContainer = () => {
               )}
             </>
           )}
-        </div> */}
+        </div>
 
         <div className="w-full flex flex-col md:flex-row items-center gap-3">
           <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
@@ -249,21 +290,21 @@ const CreateContainer = () => {
             <input
               type="text"
               required
-              value={calories}
-              onChange={(e) => setCalories(e.target.value)}
-              placeholder="Harvasted Date"
+              value={qty}
+              onChange={(e) => setQuantity(e.target.value)}
+              placeholder="Quantity in kgs"
               className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
             />
           </div>
 
           <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
-            <MdAttachMoney className="text-gray-700 text-2xl" />
+            <FaRupeeSign className="text-gray-700 text-2xl" />
             <input
               type="text"
               required
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              placeholder="Price"
+              placeholder="Price per kg"
               className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
             />
           </div>

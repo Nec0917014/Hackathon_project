@@ -6,77 +6,30 @@ import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
 import MenuContainer from "./MenuContainer";
 import CartContainer from "./CartContainer";
-import Carrot from '../img/carrot.png'
-
+import Carrot from "../img/carrot.png";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { apiUrl } from "../utils/constants";
 const MainContainer = () => {
   const [{ foodItems, cartShow }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
-  const data= [
-    {
-      imageURL: Carrot,
-      title: 'Carrot',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '100',
-      qty: 1
-    },
-    {
-      imageURL: Carrot,
-      title: 'Tomato',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '200',
-      qty: 1
+  const [data, setData] = useState([]);
 
-    },
-    {
-      imageURL: Carrot,
-      title: 'Potato',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '300',
-      qty: 1
-
-
-    },
-    {
-      imageURL: Carrot,
-      title: 'Onion',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '400',
-      qty: 1
-
-
-    },
-    {
-      imageURL: Carrot,
-      title: 'Cauliflower',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '500'
-
-    },
-    {
-      imageURL: Carrot,
-      title: 'Beetroot',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '600',
-      qty: 1
-
-
-    },
-    {
-      imageURL: Carrot,
-      title: 'Cucumber',
-      calories: '20 callories',
-      category: 'fruits',
-      price: '700',
-      qty: 1
-
+  const getItems = async () => {
+    const response = await axios.get(`${apiUrl}product/get`);
+    if (response.status === 200) {
+      const { data } = response.data;
+      setData(data);
+    } else {
+      toast.error(response.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
-  ]
+  };
+
+  useEffect(() => {
+    getItems();
+  }, []);
 
   useEffect(() => {}, [scrollValue, cartShow]);
 
@@ -110,11 +63,11 @@ const MainContainer = () => {
         <RowContainer
           scrollValue={scrollValue}
           flag={true}
-          data={data?.filter((n) => n.category === "fruits")}
+          data={data?.filter((n) => n.category === "veggie")}
         />
       </section>
 
-       <section className="w-full my-6">
+      <section className="w-full my-6">
         <div className="w-full flex items-center justify-between">
           <p className="text-2xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-green-400 to-green-600 transition-all ease-in-out duration-100">
             Our fresh & healthy fruits

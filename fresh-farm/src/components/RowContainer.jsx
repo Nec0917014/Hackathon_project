@@ -6,6 +6,7 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { BsCart3 } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa6";
+import { api } from "../utils/constants";
 
 const RowContainer = ({ flag, data, scrollValue }) => {
   const rowContainer = useRef();
@@ -30,6 +31,7 @@ const RowContainer = ({ flag, data, scrollValue }) => {
     addtocart();
   }, [items]);
 
+
   return (
     <div
       ref={rowContainer}
@@ -50,8 +52,9 @@ const RowContainer = ({ flag, data, scrollValue }) => {
                 className="w-40 h-40 -mt-8 drop-shadow-2xl overflow-hidden rounded-full bg-white flex items-center justify-center"
                 whileHover={{ scale: 1.2 }}
               >
+               
                 <img
-                  src={item?.imageURL}
+                  src={`${api}/api/assets/products/${item.imageUrl}`}
                   alt=""
                   className="max-w-full max-h-full rounded-full object-contain"
                 />
