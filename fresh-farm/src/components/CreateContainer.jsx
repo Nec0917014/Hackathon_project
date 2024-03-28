@@ -20,6 +20,7 @@ import Loader from "./Loader";
 // import { getAllFoodItems, saveItem } from "../utils/firebaseFunctions";
 import { actionType } from "../context/reducer";
 import { useStateValue } from "../context/StateProvider";
+import Header from "./Header";
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
@@ -86,47 +87,8 @@ const CreateContainer = () => {
   };
 
   const saveDetails = () => {
-    setIsLoading(true);
-    try {
-      if (!title || !calories || !imageAsset || !price || !category) {
-        setFields(true);
-        setMsg("Required fields can't be empty");
-        setAlertStatus("danger");
-        setTimeout(() => {
-          setFields(false);
-          setIsLoading(false);
-        }, 4000);
-      } else {
-        const data = {
-          id: `${Date.now()}`,
-          title: title,
-          imageURL: imageAsset,
-          category: category,
-          calories: calories,
-          qty: 1,
-          price: price,
-        };
-        saveItem(data);
-        setIsLoading(false);
-        setFields(true);
-        setMsg("Data Uploaded successfully 😊");
-        setAlertStatus("success");
-        setTimeout(() => {
-          setFields(false);
-        }, 4000);
-        clearData();
-      }
-    } catch (error) {
-      console.log(error);
-      setFields(true);
-      setMsg("Error while uploading : Try AGain 🙇");
-      setAlertStatus("danger");
-      setTimeout(() => {
-        setFields(false);
-        setIsLoading(false);
-      }, 4000);
-    }
-
+    setMsg("True");
+    clearData();
     fetchData();
   };
 
@@ -149,6 +111,7 @@ const CreateContainer = () => {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
+      {setMsg === "True" && <alert>Uploaded Successfully</alert>}
       <div className="w-[90%] md:w-[50%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center gap-4">
         {fields && (
           <motion.p
