@@ -25,6 +25,7 @@ import { useStateValue } from "../context/StateProvider";
 import axios from "axios";
 import { apiUrl } from "../utils/constants";
 import { toast } from "react-toastify";
+import Header from "./Header";
 
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
@@ -188,7 +189,7 @@ e.preventDefault()
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
-      {setMsg === "True" && <alert>Uploaded Successfully</alert>}
+      <Header />
       <div className="w-[90%] md:w-[50%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center gap-4">
         {fields && (
           <motion.p

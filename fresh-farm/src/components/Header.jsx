@@ -56,7 +56,7 @@ const Header = (userType) => {
   };
 
   const redirectToHomePage = () => {
-    window.location.assign("/");
+    window.location.assign("/home");
   };
 
   console.log("userType", userType);
@@ -64,7 +64,7 @@ const Header = (userType) => {
   return (
     <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary" style={{position: 'fixed', top: '0', left: '0', width: '100%', padding: '0px'}}>
       {/* desktop & tablet */}
-      <div className="hidden md:flex w-full h-full items-center justify-between">
+      <div className="hidden md:flex w-full h-full items-center justify-between" style={{paddingLeft: "60px", paddingRight: "60px"}}>
         <div>
           <Link to={"/"} className="flex items-center gap-2">
             <img src={Logo} className="w-8 object-cover" alt="logo" style={{width: '5em'}} />

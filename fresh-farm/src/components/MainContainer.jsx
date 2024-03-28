@@ -10,6 +10,7 @@ import Carrot from "../img/carrot.png";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { apiUrl } from "../utils/constants";
+import methodology from "../img/methodology.png";
 import Header from "./Header";
 import { useLocation } from "react-router-dom"
 
@@ -42,8 +43,42 @@ const MainContainer = () => {
     <>
      <Header userType={userType} />
       <div className="w-full h-auto flex flex-col items-center justify-center ">
-     
         <HomeContainer />
+        <section className="w-full my-6" style={{ "margin-top": "125px" }}>
+          <div className="w-full flex items-center justify-between">
+            <p className="text-2xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content before:w-32 before:h-1 before:-bottom-2 before:left-0 before:bg-gradient-to-tr from-green-400 to-green-600 transition-all ease-in-out duration-100">
+              Methodoly used for your farm
+            </p>
+
+            {/* <div className="hidden md:flex gap-3 items-center">
+            <motion.div
+              whileTap={{ scale: 0.75 }}
+              className="w-8 h-8 rounded-lg bg-green-300 hover:bg-green-500 cursor-pointer  hover:shadow-lg flex items-center justify-center"
+              onClick={() => setScrollValue(-200)}
+            >
+              <MdChevronLeft className="text-lg text-white" />
+            </motion.div>
+            <motion.div
+              whileTap={{ scale: 0.75 }}
+              className="w-8 h-8 rounded-lg bg-green-300 hover:bg-green-500 cursor-pointer transition-all duration-100 ease-in-out hover:shadow-lg flex items-center justify-center"
+              onClick={() => setScrollValue(200)}
+            >
+              <MdChevronRight className="text-lg text-white" />
+            </motion.div>
+          </div> */}
+          </div>
+          <div
+            className="w-full flex items-center justify-between"
+            style={{ marginTop: "30px" }}
+          >
+            <img src={methodology} />
+          </div>
+          {/* <RowContainer
+            scrollValue={scrollValue}
+            flag={true}
+            data={data?.map((n) => n)}
+          /> */}
+        </section>
 
         <section className="w-full my-6">
           <div className="w-full flex items-center justify-between">
@@ -71,7 +106,7 @@ const MainContainer = () => {
           <RowContainer
             scrollValue={scrollValue}
             flag={true}
-            data={data?.filter((n) => n.category === "fruits")}
+            data={data?.filter((n) => n.category === "veggie")}
           />
         </section>
 
@@ -104,6 +139,10 @@ const MainContainer = () => {
             data={data?.filter((n) => n.category === "fruits")}
           />
         </section>
+
+        {/* <MenuContainer /> */}
+
+        {cartShow && <CartContainer />}
       </div>
     </>
   );
