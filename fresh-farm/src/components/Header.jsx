@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { app } from "../firebase.config";
 
-import Logo from "../img/logo.png";
+import Logo from "../img/Logo_1.svg";
 import Avatar from "../img/avatar.png";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
@@ -23,7 +23,7 @@ const Header = () => {
     if (!user) {
       const {
         user: { refreshToken, providerData },
-      } = ''
+      } = "";
       dispatch({
         type: actionType.SET_USER,
         user: providerData[0],
@@ -51,23 +51,24 @@ const Header = () => {
     });
   };
 
-  const redirectToFarmersPage = ()=>{
-    window.location.assign('/createItem')
-  }
+  const redirectToFarmersPage = () => {
+    window.location.assign("/createItem");
+  };
 
-  const redirectToHomePage = ()=>{
-    window.location.assign('/')
-  }
+  const redirectToHomePage = () => {
+    window.location.assign("/");
+  };
 
   return (
-    <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary">
+    <header className="fixed z-50 w-screen p-3 px-4 md:p-6 md:px-16 bg-primary" style={{position: 'fixed', top: '0', left: '0', width: '100%', padding: '0px'}}>
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
-        <Link to={"/"} className="flex items-center gap-2">
-          <img src={Logo} className="w-8 object-cover" alt="logo" />
-          <p className="text-headingColor text-xl font-bold"> Organic Product</p>
-        </Link>
-
+        <div>
+          <Link to={"/"} className="flex items-center gap-2">
+            <img src={Logo} className="w-8 object-cover" alt="logo" style={{width: '5em'}} />
+            {/* <p className="text-headingColor text-xl font-bold"> Organic Product</p> */}
+          </Link>
+        </div>
         <div className="flex items-center gap-8">
           <motion.ul
             initial={{ opacity: 0, x: 200 }}
@@ -75,10 +76,16 @@ const Header = () => {
             exit={{ opacity: 0, x: 200 }}
             className="flex items-center gap-24 "
           >
-            <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer" onClick={redirectToHomePage}>
+            <li
+              className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
+              onClick={redirectToHomePage}
+            >
               Home
             </li>
-            <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer" onClick={redirectToFarmersPage}>
+            <li
+              className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer"
+              onClick={redirectToFarmersPage}
+            >
               Farmers Page
             </li>
             {/* <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
