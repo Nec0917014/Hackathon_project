@@ -5,7 +5,7 @@ import { RiRefreshFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import EmptyCart from "../img/emptyCart.svg";
+import EmptyCart from "../img/Empty_state.svg";
 import CartItem from "./CartItem";
 
 const CartContainer = () => {
@@ -61,7 +61,7 @@ const CartContainer = () => {
 
       {/* bottom section */}
       {cartItems && cartItems.length > 0 ? (
-        <div className="w-full h-full bg-cartBg rounded-t-[2rem] flex flex-col">
+        <div className="w-full h-full rounded-t-[2rem] flex flex-col">
           {/* cart Items section */}
           <div className="w-full h-340 md:h-42 px-6 py-10 flex flex-col gap-3 overflow-y-scroll scrollbar-none">
             {/* cart Item */}
@@ -101,7 +101,7 @@ const CartContainer = () => {
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Check Out
               </motion.button>
@@ -109,7 +109,7 @@ const CartContainer = () => {
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
-                className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Login to check out
               </motion.button>

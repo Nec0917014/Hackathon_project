@@ -172,12 +172,12 @@ const CreateContainer = () => {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="Give me a title..."
+            placeholder="Product Name"
             className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
           />
         </div>
 
-        <div className="w-full">
+        {/* <div className="w-full">
           <select
             onChange={(e) => setCategory(e.target.value)}
             className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
@@ -196,9 +196,9 @@ const CreateContainer = () => {
                 </option>
               ))}
           </select>
-        </div>
+        </div> */}
 
-        <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-340 cursor-pointer rounded-lg">
+        {/* <div className="group flex justify-center items-center flex-col border-2 border-dotted border-gray-300 w-full h-225 md:h-340 cursor-pointer rounded-lg">
           {isLoading ? (
             <Loader />
           ) : (
@@ -241,7 +241,7 @@ const CreateContainer = () => {
               )}
             </>
           )}
-        </div>
+        </div> */}
 
         <div className="w-full flex flex-col md:flex-row items-center gap-3">
           <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
@@ -251,7 +251,7 @@ const CreateContainer = () => {
               required
               value={calories}
               onChange={(e) => setCalories(e.target.value)}
-              placeholder="Calories"
+              placeholder="Harvasted Date"
               className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
             />
           </div>

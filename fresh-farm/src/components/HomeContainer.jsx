@@ -22,18 +22,18 @@ const HomeContainer = () => {
         </div>
       </div>  */}
 
-      <p className="text-[2.5rem] lg:text-[4.5rem] font-bold tracking-wide text-headingColor">
-        The Fastest Delivery in
-        <span className="text-green-500 text-[3rem] lg:text-[5rem]">
-          Your City
+      <p className="text-[2.5rem] lg:text-[3.5rem] font-bold tracking-wide text-headingColor">
         The Organic Food
-        <span className="text-green-600 text-[3rem] lg:text-[5rem]">
+        <p className="text-green-600 text-[3rem] lg:text-[3.5rem]">
           From Farmers
-        </span>
-        </span>
+        </p>
       </p>
 
       <p className="text-base text-textColor text-center md:text-left md:w-[80%]">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima velit
+        eaque fugit distinctio est nam voluptatum architecto, porro iusto
+        deserunt recusandae ipsa minus eos sunt, dolores illo repellat facere
+        suscipit!
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima velit
         eaque fugit distinctio est nam voluptatum architecto, porro iusto
         deserunt recusandae ipsa minus eos sunt, dolores illo repellat facere
@@ -42,7 +42,7 @@ const HomeContainer = () => {
 
       <button
         type="button"
-        className="bg-gradient-to-br from-orange-400 to-orange-500 w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg transition-all ease-in-out duration-100"
+        className="bg-gradient-to-br from-green-400 to-green-500 w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg transition-all ease-in-out duration-100"
       >
         Order Now
       </button>
