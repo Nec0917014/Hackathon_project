@@ -26,9 +26,9 @@ const HomeContainer = () => {
       </div>  */}
 
           <p className="text-[2.5rem] lg:text-[3.5rem] font-bold tracking-wide text-headingColor">
-            The Organic Food
+            From Farm Fields
             <p className="text-green-600 text-[3rem] lg:text-[3.5rem]">
-              From Farmers
+              to Your Plate
             </p>
           </p>
 
@@ -41,12 +41,12 @@ const HomeContainer = () => {
             delicious food from farm to table.
           </p>
 
-          <button
+          {/* <button
             type="button"
             className="bg-gradient-to-br from-green-400 to-green-500 w-full md:w-auto px-4 py-2  rounded-lg hover:shadow-lg transition-all ease-in-out duration-100"
           >
             Order Now
-          </button>
+          </button> */}
         </div>
         <div className="py-2 flex-1 flex items-center relative">
           {/* <img
