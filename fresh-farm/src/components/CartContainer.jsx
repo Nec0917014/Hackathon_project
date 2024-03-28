@@ -8,6 +8,7 @@ import { actionType } from "../context/reducer";
 import EmptyCart from "../img/Empty_state.svg";
 import CartItem from "./CartItem";
 import { FaRupeeSign } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
@@ -111,8 +112,12 @@ const CartContainer = () => {
                 whileTap={{ scale: 0.8 }}
                 type="button"
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-green-400 to-green-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                onClick={() => {
+                  clearCart()
+                  toast.success("Order Placed Successfully", {position: 'top-right'})
+                }}
               >
-                Login to check out
+                Place Order
               </motion.button>
             )}
           </div>
